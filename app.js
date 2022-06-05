@@ -34,6 +34,7 @@ app.use("/api/carts", cartRouter)
 app.use("/api/orders", orderRouter)
 app.use("/api/checkout", stripeRouter)
 
+const path = require('path');
 app.use(express.static(path.join(__dirname, "/frontend/build")));
 
 app.get('*', (req, res) => {
