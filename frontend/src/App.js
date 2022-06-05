@@ -12,16 +12,28 @@ import { useSelector } from "react-redux"
  
 const App = () => {
 
-  // const user = useSelector((state) => state.user.currentUser)
+  const user = useSelector((state) => state.user.currentUser)
 
   return (
     <BrowserRouter>
+    {
+      user ?
+      (
+        <>
+        <Route path="/" element={<Home/>}></Route>
+        <Route path='/products/:category' element={<ProductList/>}></Route>
+        <Route path='/product/:id' element={<Product/>}></Route>
+        <Route path='/cart' element={<Cart/>}></Route>
+        <Route path='/login' element={<Login/>}></Route>
+        </>
+      ) : (
+        <Routes>
+           <Route path="/register" element = {<Register/>}></Route>
+        </Routes>
+      )
+    } 
     <Routes>
-      <Route path="/" element={<Home/>}></Route>
-      <Route path='/products/:category' element={<ProductList/>}></Route>
-      <Route path='/product/:id' element={<Product/>}></Route>
-      <Route path='/cart' element={<Cart/>}></Route>
-      <Route path='/login' element={<Login/>}></Route>y
+      
       {/* <Route path='/success' element={<Success/>}></Route>
       <Route path='/login'> element={user ? <Redirect to="/"/> : <Login/>}</Route>
       <Route path="/register" element = {user ? <Redirect to="/"/> : <Register/>}></Route> */}
