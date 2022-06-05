@@ -87,7 +87,8 @@ const Navbar = () => {
       </Center>
 
       <Right>
-        <RegLog >REGISTER</RegLog>
+        <RegLog >
+        <Link to="/register" style={{ textDecoration: 'none' }}>REGISTER</Link></RegLog>
         <RegLog>
         <Link to="/login" style={{ textDecoration: 'none' }}>LOGIN</Link>
         </RegLog>

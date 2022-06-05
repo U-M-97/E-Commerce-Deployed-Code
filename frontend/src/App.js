@@ -8,16 +8,28 @@ import Cart from './pages/Cart'
 import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
 import Stripe from './components/stripe'
 import { useSelector } from "react-redux"
+import {user} from "./redux/userRedux"
+import {useEffect, useState} from "react"
 
  
 const App = () => {
 
-  const user = useSelector((state) => state.user.currentUser)
+  const isUser = useSelector(user)
+  const [userPresent, setUserPresent] = useState("")
+
+  useEffect(() => {
+    if(isUser){
+      setUserPresent(true)
+    }else{
+      setUserPresent(false)
+      console.log("ajajaj")
+    }
+  },[])
 
   return (
     <BrowserRouter>
     {
-      user ?
+      isUser ?
       (
         <>
         <Routes>
@@ -26,12 +38,13 @@ const App = () => {
           <Route path='/product/:id' element={<Product/>}></Route>
           <Route path='/cart' element={<Cart/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
+          <Route path='/register' element={<Register/>}></Route>
         </Routes>
         
         </>
       ) : (
         <Routes>
-           <Route path="/register" element = {<Register/>}></Route>
+           <Route path="/" element = {<Login/>}></Route>
         </Routes>
       )
     } 
