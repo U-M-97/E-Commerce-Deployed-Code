@@ -4,6 +4,7 @@ import ProductItems from './ProductItems'
 import styled from 'styled-components'
 import { useState, useEffect} from 'react'
 import axios from "axios"
+import {userReq} from "../requestMethod"
 
 const Container = styled.div`
   display: flex;
@@ -20,9 +21,9 @@ const Products = ({cat, filters, sort}) => {
   useEffect(()=>{
     const getProducts = async () =>{
       try{
-        const res = await axios.get(
-          cat ? `http://localhost:5000/api/products?category=${cat}`
-          : "http://localhost:5000/api/products"
+        const res = await userReq.get(
+          cat ? `/products?category=${cat}`
+          : "/products"
         )
         setProducts(res.data)
       }catch(err){
